@@ -4,8 +4,6 @@ public class JumpCommand implements FrogCommand {
     private Frog frog;
     private int backupPosition;
     private int steps;
-    private boolean isCanceled = false;
-
 
     public static FrogCommand jumpCommand(Frog frog, int steps) {
         // возвращаете объект команды, у которого
@@ -19,14 +17,6 @@ public class JumpCommand implements FrogCommand {
         this.frog = frog;
         this.backupPosition = frog.getPosition();
         this.steps = steps;
-    }
-
-    public boolean isCanceled() {
-        return isCanceled;
-    }
-
-    public void setCanceled(boolean canceled) {
-        isCanceled = canceled;
     }
 
     @Override
@@ -43,7 +33,6 @@ public class JumpCommand implements FrogCommand {
     public boolean undo() {
         if (frog.getPosition() != backupPosition) {
             frog.setPosition(backupPosition);
-            isCanceled = true;
             return true;
         }
         return false;
